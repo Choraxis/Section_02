@@ -59,14 +59,19 @@ void PlayGame() {
   BCGame.Reset();
   int32 max_tries = BCGame.GetMaxTries();
 
-  for (int32 i = 0; i < max_tries; ++i) {
+  while (!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= max_tries) {
     FText guess = GetValidGuess();
     BullCowCount BCC = BCGame.SubmitValidGuess(guess);
-    cout << "Bulls = " << BCC.bulls_ << ". Cows = " << BCC.cows_ << endl << endl;
+    cout << "Bulls = " << BCC.bulls_ << ". Cows = " << BCC.cows_ << endl
+         << endl;
   }
 }
 
 bool AskToPlayAgain() {
+  if (BCGame.IsGameWon())
+    cout << "You won! Great job!" << endl;
+  else
+    cout << "Better luck next time!" << endl;
   cout << "Do you want to play again? (y/n) > ";
   FText response;
   getline(cin, response);

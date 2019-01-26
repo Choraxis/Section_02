@@ -28,8 +28,8 @@ class BullCowGame {
   int32 GetMaxTries() const;
   int32 GetCurrentTry() const;
   int32 GetHiddenWordLength() const;
-
   bool IsGameWon() const;
+
   GuessStatus CheckGuessValidity(FString) const;
 
   void Reset();  // TODO make a more rich return value
@@ -38,6 +38,7 @@ class BullCowGame {
 
 
  private:
+  bool is_game_won_;
   int32 my_current_try_;
   int32 my_max_tries_;
   FString my_hidden_word_;

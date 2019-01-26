@@ -1,3 +1,4 @@
+#include <iostream>
 #include "bull_cow_game.h"
 
 using FString = std::string;
@@ -11,8 +12,10 @@ BullCowGame::BullCowGame() { Reset(); }
 int32 BullCowGame::GetMaxTries() const { return my_max_tries_; }
 int32 BullCowGame::GetCurrentTry() const { return my_current_try_; }
 int32 BullCowGame::GetHiddenWordLength() const { return my_hidden_word_.length(); }
+bool BullCowGame::IsGameWon() const { return is_game_won_; }
 
 void BullCowGame::Reset() {
+  is_game_won_ = false;
   my_current_try_ = 1;
   my_max_tries_ = kMaxTries;
   my_hidden_word_ = kHiddenWord;
@@ -34,11 +37,10 @@ BullCowCount BullCowGame::SubmitValidGuess(FString guess) {
       }
     }
   }
-  return BCC;
-}
+  if (BCC.bulls_ == hidden_word_length)
+    is_game_won_ = true;
 
-bool BullCowGame::IsGameWon() const {
-  return false;
+  return BCC;
 }
 
 GuessStatus BullCowGame::CheckGuessValidity(FString guess) const {
