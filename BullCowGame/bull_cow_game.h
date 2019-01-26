@@ -13,6 +13,7 @@ struct BullCowCount {
 };
 
 enum class GuessStatus {
+  Invalid_Status,
   OK,
   Not_Isogram,
   Incorrect_Length,
