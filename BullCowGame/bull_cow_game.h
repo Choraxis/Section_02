@@ -34,7 +34,7 @@ class BullCowGame {
 
   void Reset();  // TODO make a more rich return value
   // counts bulls & cows, and increases try number assuming valid guess
-  BullCowCount SubmitGuess(FString);
+  BullCowCount SubmitValidGuess(FString);
 
 
  private:

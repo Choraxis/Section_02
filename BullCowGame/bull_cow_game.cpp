@@ -18,7 +18,7 @@ void BullCowGame::Reset() {
   my_hidden_word_ = kHiddenWord;
 }
 
-BullCowCount BullCowGame::SubmitGuess(FString guess) {
+BullCowCount BullCowGame::SubmitValidGuess(FString guess) {
   ++my_current_try_;
   BullCowCount BCC;
   int32 hidden_word_length = my_hidden_word_.length();
