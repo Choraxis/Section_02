@@ -27,9 +27,9 @@ void PrintIntro() {
 // loop continually until the user gives a valid guess
 FText GetValidGuess() {
   GuessStatus status = GuessStatus::Invalid_Status;
+  FText guess = "";
 
   do {
-    FText guess;
     cout << "Try " << BCGame.GetCurrentTry() << ". Enter your guess > ";
     getline(cin, guess);
     status = BCGame.CheckGuessValidity(guess);
@@ -37,22 +37,22 @@ FText GetValidGuess() {
     switch (status) {
     case GuessStatus::Incorrect_Length:
       cout << "Please enter a " << BCGame.GetHiddenWordLength()
-            << " letter word.";
+            << " letter word." << endl;
       break;
     case GuessStatus::Not_Alphabetic:
-      cout << "Please enter a word that only consists of letters.";
+      cout << "Please enter a word that only consists of letters." << endl;
       break;
     case GuessStatus::Not_Isogram:
-      cout << "Please enter an isogram.";
+      cout << "Please enter an isogram." << endl;
       break;
     case GuessStatus::Not_Lowercase:
-      cout << "Please enter a lowercase word.";
+      cout << "Please enter a lowercase word." << endl;
       break;
     default:
-      return guess;
+      break;
     }
-    cout << endl;
   } while (status != GuessStatus::OK);
+  return guess;
 }
 
 void PlayGame() {
@@ -61,8 +61,8 @@ void PlayGame() {
 
   for (int32 i = 0; i < max_tries; ++i) {
     FText guess = GetValidGuess();
-    BullCowCount BCC = BCGame.SubmitGuess(guess);
-    cout << "Bulls = " << BCC.bulls_ << ". Cows = " << BCC.cows_ << endl;
+    BullCowCount BCC = BCGame.SubmitValidGuess(guess);
+    cout << "Bulls = " << BCC.bulls_ << ". Cows = " << BCC.cows_ << endl << endl;
   }
 }
 
